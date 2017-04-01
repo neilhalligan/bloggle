@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  get '/signup', to: "users#new"
+
   root to: 'static_pages#home'
 
-  get 'static_pages/about'
-  get 'static_pages/help'# => "static_pages#help"
+  get '/about', to: "static_pages#about"
+  get '/help', to: "static_pages#help"
   # get 'dashboard' => 'dashboards#dashboard', as: 'dashboard'
   # resources :static_pages, only: [:about, :help]
 
