@@ -9,8 +9,12 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", about_path, count: 2
     assert_select "a[href=?]", signup_path, count: 1
   end
+
+  test "get user show" do
+    user = User.create!(name: "John", email: "john@gmail.com",
+                 password: "foobar", password_confirmation: "foobar")
+    get user_path(user.id)
+    assert_response :success
+  end
 end
 
-# Get the root path (Home page).
-# Verify that the right page template is rendered.
-# Check for the correct links to the Home, Help, About, and Contact pages.
