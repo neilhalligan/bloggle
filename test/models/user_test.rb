@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # def setup
-  #   @user = User.new(name: "John", email: "john@gmail.com",
-  #                    password: "foobar", password_confirmation: "foobar")
-  # end
+  def setup
+    @user = User.new(name: "John", email: "john@gmail.com",
+                     password: "foobar", password_confirmation: "foobar")
+  end
 
   test "should be valid" do
     assert @user.valid?
