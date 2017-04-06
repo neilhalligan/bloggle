@@ -9,5 +9,9 @@ class User < ApplicationRecord
   NO_SPACES_REGEX = Regexp.new '\A([^(\s)]{6,})\z'
   validates :password, length: { minimum: 6 }, format: { with: NO_SPACES_REGEX }
 
-
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end
