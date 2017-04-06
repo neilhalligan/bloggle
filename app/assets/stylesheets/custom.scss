@@ -177,3 +177,21 @@ input {
     color: $state-danger-text;
   }
 }
+
+.checkbox {
+  position: relative;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  position: absolute;
+  bottom: 4px;
+  width: auto;
+  margin-left: 0;
+}
