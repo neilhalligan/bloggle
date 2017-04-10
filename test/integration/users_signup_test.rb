@@ -27,6 +27,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template "users/show"
     assert_select ".alert-success", { count: 1, text: /.+/ }
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", logout_path
+    assert_select "a[href=?]", user_path(User.last)
   end
 
 end
