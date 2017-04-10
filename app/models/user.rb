@@ -9,7 +9,9 @@ class User < ApplicationRecord
                     uniqueness: { case_insensitive: false }
   has_secure_password
   NO_SPACES_REGEX = Regexp.new '\A([^(\s)]{6,})\z'
-  validates :password, length: { minimum: 6 }, format: { with: NO_SPACES_REGEX }
+  validates :password, length: { minimum: 6 },
+                       format: { with: NO_SPACES_REGEX },
+                       allow_nil: true
 
   class << self
     def digest(string)

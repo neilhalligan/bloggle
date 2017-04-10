@@ -74,5 +74,9 @@ class UserTest < ActiveSupport::TestCase
     @user.remember_digest = nil
     assert_not @user.authenticated?("")
   end
+
+  test "admin defaults to false" do
+    assert_not @user.admin?
+  end
 end
 
