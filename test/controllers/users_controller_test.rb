@@ -5,6 +5,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:dave)
     @other_user = users(:steve)
     @admin = users(:archer)
+    @unactivated_user = users(:karen)
   end
 
   test "should get new" do
@@ -37,6 +38,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     patch user_path(@other_user), params: { user: { name: @user.name,
                                               email: @user.email } }
     assert flash.empty?
+    assert_redirected_to root_path
+  end
+
+  test "should redirect show when user not activated" do
+    get user_path(@unactivated_user), params: { id: @unactivated_user.id }
     assert_redirected_to root_path
   end
 

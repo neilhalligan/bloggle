@@ -23,10 +23,9 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", logout_path, count: 1
   end
 
+  # does not appear to be in correct section
   test "get user show" do
-    user = User.create!(name: "John", email: "john@gmail.com",
-                 password: "foobar", password_confirmation: "foobar")
-    get user_path(user.id)
+    get user_path(@user)
     assert_response :success
   end
 end

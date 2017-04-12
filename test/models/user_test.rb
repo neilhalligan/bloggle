@@ -72,11 +72,19 @@ class UserTest < ActiveSupport::TestCase
 
   test "authenticated should return false for a user with nil digest" do
     @user.remember_digest = nil
-    assert_not @user.authenticated?("")
+    assert_not @user.authenticated?(:remember, "")
   end
 
   test "admin defaults to false" do
     assert_not @user.admin?
+  end
+
+  test "verify create callback defines activation_token and activation_digest" do
+    assert_nil @user.activation_token
+    assert_nil @user.activation_digest
+    @user.save
+    assert_not_nil @user.activation_token
+    assert_not_nil @user.activation_digest
   end
 end
 
