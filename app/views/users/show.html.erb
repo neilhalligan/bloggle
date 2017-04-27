@@ -8,4 +8,16 @@
       </h1>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.posts.any? %>
+      <h3><%= @user.posts.count %> Posts</h3>
+      <ol class="posts">
+        <%= render @posts %>
+      </ol>
+      <%= will_paginate @posts %>
+    <% end %>
+  </div>
+
 </div>
+
+

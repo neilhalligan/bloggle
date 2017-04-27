@@ -19,14 +19,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", help_path, count: 2
     assert_select "a[href=?]", about_path, count: 2
     assert_select "a[href=?]", users_path, count: 1
-    assert_select "a[href=?]", user_path(@user), count: 1
+    assert_select "a[href=?]", user_path(@user), count: 63
     assert_select "a[href=?]", logout_path, count: 1
-  end
-
-  # does not appear to be in correct section
-  test "get user show" do
-    get user_path(@user)
-    assert_response :success
   end
 end
 

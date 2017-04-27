@@ -19,6 +19,14 @@ class UserTest < ActiveSupport::TestCase
     @user.email = "     "
   end
 
+  test "should destroy dependent posts" do
+    @user.save
+    @user.posts.create!(content: "Lorem ipsum")
+    assert_difference "Post.count", -1 do
+      @user.destroy
+    end
+  end
+
   test "name max 50 chars" do
     @user.name = "F"*51
     assert_not @user.valid?

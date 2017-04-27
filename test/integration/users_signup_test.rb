@@ -53,20 +53,3 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   end
 
 end
-#check on root path
-#check not valid
-#try invalid login
-# assert redirected to root
-# assert flash message danger, not nil
-
-#edit request with invalid token
-# assert not logged in
-
-#edit request with invalid email
-# assert not logged in
-
-#try valid login
-# assert logged in
-# assert on users template
-# assert flash success, not empty
-# assert_template root_path
