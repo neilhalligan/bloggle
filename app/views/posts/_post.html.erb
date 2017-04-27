@@ -4,8 +4,12 @@
   <span class="content">
     <%= post.content %>
     <% if post.photo? %>
-      <%= cl_image_tag post.photo, height: 400, width: 400, crop: :fill %>
+      <% if Rails.env.production? %>
+        <%= cl_image_tag post.photo, height: 400, width: 400, crop: :fill %>
+      <% else %>
+        <%= image_tag post.photo, height: 400, width: 400, crop: :fill %>
       <%#= cl_image_tag("xag6ctzh63rqwef61gvc", width: 400, height: 400) %>
+      <% end %>
     <% end %>
   </span>
   <span class="timestamp">
