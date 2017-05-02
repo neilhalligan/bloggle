@@ -94,5 +94,14 @@ class UserTest < ActiveSupport::TestCase
     assert_not_nil @user.activation_token
     assert_not_nil @user.activation_digest
   end
+
+  test "should follow and unfollow a user" do
+    other_user = users(:dave)
+    assert_not @user.following?(other_user)
+    @user.follow(other_user)
+    assert @user.following?(other_user)
+    @user.unfollow(other_user)
+    assert_not @user.following?(other_user)
+  end
 end
 
