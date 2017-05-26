@@ -8,7 +8,11 @@
       </h1>
     </section>
   </aside>
+  <section class="stats">
+    <%= render 'shared/stats' %>
+  </section>
   <div class="col-md-8">
+    <%= render "follow_form" if logged_in? %>
     <% if @user.posts.any? %>
       <h3><%= @user.posts.count %> Posts</h3>
       <ol class="posts">

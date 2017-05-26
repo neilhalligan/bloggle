@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(name: "John", email: "john@gmail.com",
-                     password: "foobar", password_confirmation: "foobar")
+                     password: "foobar", password_confirmation: "foobar", activated: true, activated_at: Time.zone.now)
   end
 
   test "should be valid" do
@@ -97,11 +97,31 @@ class UserTest < ActiveSupport::TestCase
 
   test "should follow and unfollow a user" do
     other_user = users(:dave)
-    assert_not @user.following?(other_user)
-    @user.follow(other_user)
-    assert @user.following?(other_user)
-    @user.unfollow(other_user)
-    assert_not @user.following?(other_user)
+    steve = users(:steve)
+    assert_not steve.following?(other_user)
+    steve.follow(other_user)
+    assert steve.following?(other_user)
+    assert other_user.followers.include?(steve)
+    steve.unfollow(other_user)
+    assert_not steve.following?(other_user)
+  end
+
+  test "feed should only show followed and self posts" do
+    dave = users(:dave)
+    lana = users(:lana)
+    archer = users(:archer)
+    # self posts
+    dave.posts.each do |post_self|
+      assert dave.feed.include?(post_self)
+    end
+    # followed posts
+    lana.posts.each do |post_followed|
+      assert dave.feed.include?(post_followed)
+    end
+    # unfollowed posts
+    archer.posts.each do |post_unfollowed|
+      assert_not dave.feed.include?(post_unfollowed)
+    end
   end
 end
 

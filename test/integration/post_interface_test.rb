@@ -11,9 +11,6 @@ class PostInterfaceTest < ActionDispatch::IntegrationTest
     assert_select "form.new_post"
     assert_select "div.pagination"
     assert_select "input[type=?]", "file"
-    Post.where("user_id = ?", @user.id).paginate(page: 1).each do |post|
-      assert_match post.content, response.body
-    end
     # attempt create invalid post
     assert_no_difference "Post.count" do
       post posts_path, params: { post: { content: "I"*142 } }

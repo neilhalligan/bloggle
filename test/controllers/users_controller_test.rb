@@ -82,5 +82,27 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to users_path
   end
+
+  test "should redirect followers if not logged in" do
+    get followers_user_path(@user)
+    assert_redirected_to login_path
+  end
+
+  test "should redirect followings if not logged in" do
+    get following_user_path(@user)
+    assert_redirected_to login_path
+  end
+
+  # test "should get following if logged in" do
+  #   log_in_as(@user)
+  #   get following_user_path(@other_user)
+  #   assert_template following_user_path(@other_user)
+  # end
+
+  # test "should get followers if logged in" do
+  #   log_in_as(@user)
+  #   get following_user_path(@other_user)
+  #   assert_template followers_user_path(@other_user)
+  # end
 end
 
